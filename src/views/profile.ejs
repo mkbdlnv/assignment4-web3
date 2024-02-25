@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <title>Profile</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main class="container-fluid d-flex justify-content-center">
+        <div id="profile">
+            <div class="row">
+                <div class="col d-flex align-items-center">
+                    <h1><%= user.name + ' ' + user.lastname %></h1>
+                </div>
+                <div class="col d-flex justify-content-end">   <div id="avatar"><img src="<%= user.img_path %>" alt="Avatar"></div></div>
+            </div>
+            <div class="row"><p><%= user.bio %></p></div>
+         
+            
+            
+    
+            <% if (user.wallet === null) { %>
+                <button id="connectWalletButton">Connect Wallet</button>
+            <% } else {%>
+                <div id="address"><img id="metamaskImg" src="/img/metamask.png" alt=""><%=user.wallet %></div>
+    
+            <div id="tokens">
+                <h2>Tokens</h2>
+                <ul>
+                    <li>Your KTN NFT token: <%= tokenId %> </li>
+                    <li>NFT details:  <a target="_blank" href="<%= nftURL %>">view</a> </li>
+                    <li>NFT image:  <br><img id="nftIMG" src="<%= nftIMG %>" alt=""></li>
+                </ul>
+            </div>
+            <div id="tokens">
+                <h2>Balance</h2>
+                <ul>
+                    <p>Click 100 times: <span id="clickCount">0</span></p>
+                    <button id="mineButton" class="btn btn-primary mb-2">Click to mine DOG coin</button>
+                    <li>Dog coins: <span id="erc20"><%= balanceCoin %> DOG</span></li>
+                    <li>Kittens: <span id="erc721"><%= balance %> KTN</span></li>
+                </ul>
+            </div>
+            <% } %>
+
+            
+        </div>
+        <div class="row" id="freindsSidebar">
+            <h5>Your friends:</h5>
+            <ul>
+                <% friends.forEach(friend => { %>
+                <li><a href="/user/<%= friend.id%>"><%= friend.username%></a></li>
+                <% }); %>
+            </ul>
+            <h5>Friendship requests:</h5>
+            <ul>
+                <% friendsRequests.forEach(request => { %>
+                <li><a href="/user/<%= request.id%>"><%= request.username%></a></li>
+                <% }); %>
+            </ul>
+        </div>
+    
+        <script src="https://kit.fontawesome.com/597061bca4.js" crossorigin="anonymous"></script>
+        <script src="scripts/user-profile.js"></script>
+        <script src="/js/connect-wallet.js"></script>
+        <script src="/js/mineCoin.js"></script>
+    </main>
+
+
+</body>
+</html>

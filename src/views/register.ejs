@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <title>Registration</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main>
+        <div class="login-page">
+            <div class="form">
+                <form class="register-form"  method="POST" action="/auth/register" enctype="multipart/form-data">
+                    <input type="text" placeholder="Name" name="name" required/>
+                    <input type="text" placeholder="Lastame" name="lastname" required/>
+                    <textarea placeholder="Bio" name="bio" id="" cols="30" rows="10" required></textarea>
+                    <label for="formFile" class="form-label">Choose avatar</label>
+                    <input class="form-control" name="image" type="file" id="formFile" required>
+                    <input type="text" placeholder="Username" name="username" required/>
+                    <% if(typeof usernameError !== 'undefined') { %>
+                    <div class="alert alert-danger"><%= usernameError %></div>
+                    <% } %>
+                    <input type="password" placeholder="Password" name="password" required/>
+                    <button type="submit">Register</button>
+                    <p class="message">Already have account?  <a href="/auth/login">Sign in</a></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+  
+</body>
+</html>
